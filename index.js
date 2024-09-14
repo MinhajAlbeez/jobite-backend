@@ -1,29 +1,22 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
-
 const app = express();
+const database = require('./config/database'); 
+const infoRoutes = require('./routes/infoRoutes');
+const { validate } = require('./middlewares/validationMiddleware');
+const { infoSchema } = require('./schemas/validationSchemas');
+
 app.use(cors());
 app.use(express.json());
-const InfoModel = require('./models/Information')
-
-const PORT = 8000;
-
-mongoose.connect("mongodb+srv://syedminhajalbeez:zyApjtmrFROqg6PS@cluster0.ogtzf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 app.get('/', (req, res) => {
-    InfoModel.find({})
-    .then(users => res.json(users))
-    .catch(err => res.json(err))
-});
-
-app.post("/createInfo", (req, res) => {
-    InfoModel.create(req.body)
-      .then(user => res.json(user))
-      .catch(err => res.json(err));
+    res.send(`server is running on port ${PORT}`);
   });
-  
+
+app.use('/info', infoRoutes);
+
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
