@@ -8,7 +8,8 @@ const InfoSchema = new mongoose.Schema({
   currentPosition: { type: String },
   jobType: { type: String, enum: ['Full Time', 'Part Time', 'Contract'], required: true },
   skills: { type: [String], required: true },
-  resume: { type: String }
+  resume: { type: String },
+  aboutUs: { type: String }
 });
 
 const InfoModel = mongoose.model('Info', InfoSchema);
