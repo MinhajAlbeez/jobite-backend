@@ -7,16 +7,17 @@ exports.getAllInfo = (req, res) => {
 };
 
 exports.createInfo = (req, res) => {
-  const resumePath = req.file ? req.file.path : null;
+  const resumeUrl = req.file ? req.file.path : null; 
 
   const newInfo = {
     ...req.body,
-    resume: resumePath  
+    resume: resumeUrl 
   };
 
   InfoModel.create(newInfo)
     .then(user => res.status(201).json(user))
     .catch(err => res.status(500).json({ error: 'Error saving data', details: err.message }));
 };
+
 
 
