@@ -3,13 +3,16 @@ const path = require('path');
 const upload = require('../config/cloudinaryConfig'); // Assuming this config file handles Cloudinary setup
 
 // Function to get all info
-exports.getAllInfo = (req, res) => {
-  InfoModel.find({})
-    .then(users => res.json(users))
-    .catch(err => res.status(500).json({ error: 'Error fetching data', details: err.message }));
+exports.getAllInfo = async (req, res) => {
+  try {
+    const users = await InfoModel.find({});
+    return res.json(users);
+  } catch (err) {
+    return res.status(500).json({ error: 'Error fetching data', details: err.message });
+  }
 };
 
-exports.createInfo = (req, res) => {
+exports.createInfo = async (req, res) => {
   const skills = req.body.skills || [];
   const expectedSalary = parseFloat(req.body.expectedSalary);
 
@@ -25,8 +28,10 @@ exports.createInfo = (req, res) => {
     resume: resumeUrl, // Cloudinary URL
   };
 
-  // Save new info to the database
-  InfoModel.create(newInfo)
-    .then(user => res.status(201).json(user))
-    .catch(err => res.status(500).json({ error: 'Error saving data', details: err.message }));
+  try {
+    const user = await InfoModel.create(newInfo);
+    return res.status(201).json(user);
+  } catch (err) {
+    return res.status(500).json({ error: 'Error saving data', details: err.message });
+  }
 };
