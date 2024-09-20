@@ -1,6 +1,5 @@
 const InfoModel = require('../models/Information');
-const path = require('path');
-const upload = require('../config/cloudinaryConfig');
+const path = require('../config/cloudinaryConfig');
 
 exports.getAllInfo = async (req, res) => {
   try {
