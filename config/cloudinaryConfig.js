@@ -11,9 +11,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'resume', 
-    allowedFormats: ['jpg', 'png', 'pdf'], 
-    transformation: [{ width: 500, height: 500, crop: 'limit' }], 
+    folder: 'resume',  // Specify the folder in your Cloudinary account where the files will be stored
+    allowed_formats: ['jpg', 'png', 'pdf'],  // Specify allowed file formats
+    transformation: [{ width: 500, height: 500, crop: 'limit' }],  // Optional transformation
   },
 });
 

@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 app.get('/', (req, res) => {
-    res.send(`server is running on port ${PORT}`);
+    res.send(`server is running on portt ${PORT}`);
   });
   app.use('/api', userRoutes); 
 
