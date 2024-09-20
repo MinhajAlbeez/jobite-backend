@@ -1,8 +1,7 @@
 const InfoModel = require('../models/Information');
 const path = require('path');
-const upload = require('../config/cloudinaryConfig'); // Assuming this config file handles Cloudinary setup
+const upload = require('../config/cloudinaryConfig');
 
-// Function to get all info
 exports.getAllInfo = async (req, res) => {
   try {
     const users = await InfoModel.find({});
@@ -20,12 +19,12 @@ exports.createInfo = async (req, res) => {
     return res.status(400).json({ error: 'Invalid salary value' });
   }
 
-  const resumeUrl = req.file ? req.file.path : null; // Cloudinary URL
+  const resumeUrl = req.file ? req.file.path : null; 
   const newInfo = {
     ...req.body,
-    skills, // Skills is an array
-    expectedSalary, // Store as a number
-    resume: resumeUrl, // Cloudinary URL
+    skills, 
+    expectedSalary, 
+    resume: resumeUrl,
   };
 
   try {
