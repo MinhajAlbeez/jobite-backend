@@ -8,7 +8,7 @@ const InfoModel = require('../models/Information');
 
 // router.get('/getInfo', infoController.getAllInfo);
 
-router.get('/getInfo', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const users = await InfoModel.find({});
     res.status(200).json(users);
