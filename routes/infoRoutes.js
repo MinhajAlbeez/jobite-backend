@@ -8,14 +8,15 @@ const InfoModel = require('../models/Information');
 
 // router.get('/getInfo', infoController.getAllInfo);
 
-router.get('/', async (req, res) => {
+router.get('/getInfo', async (req, res) => {
   try {
-    const users = await InfoModel.find({});
+    const users = await InfoModel.find({}); 
     res.status(200).json(users);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 router.post(
   '/createInfo', 

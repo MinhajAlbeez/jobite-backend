@@ -6,28 +6,19 @@ const infoRoutes = require('./routes/infoRoutes');
 const { validate } = require('./middlewares/validationMiddleware');
 const { infoSchema } = require('./schemas/validationSchemas');
 const userRoutes = require('./routes/userRoutes');
-const InfoModel = require('./models/Information');
 
 app.use(cors());
 app.use(express.json());
 // app.use(express.json({ limit: '50mb' }));
 
 
-// app.get('/', (req, res) => {
-//     res.send(`server is running on portt ${PORT}`);
-//   });
-  app.use('/api', userRoutes)
+app.get('/', (req, res) => {
+    res.send(`server is running on port ${PORT}`);
+  });
+  app.use('/api', userRoutes); 
 
 
-// app.use('/info', infoRoutes);
-app.get('/', async (req, res) => {
-  try {
-    const users = await InfoModel.find({});
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+app.use('/info', infoRoutes);
 
 const PORT = process.env.PORT || 8000;
 
