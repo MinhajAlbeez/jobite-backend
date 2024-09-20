@@ -22,10 +22,13 @@
   ],
   "functions": {
     "api/**": {
-      "maxDuration": 300 
+      "maxDuration": 300
     },
     "info/**": {
-      "maxDuration": 300 
+      "maxDuration": 300
+    },
+    "api/users/**/*.js": {
+      "maxDuration": 30
     }
   }
 }
