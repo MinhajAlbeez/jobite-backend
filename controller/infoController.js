@@ -1,5 +1,5 @@
 const InfoModel = require('../models/Information');
-const path = require('../config/cloudinaryConfig');
+const path = require('path'); // Ensure path is required properly
 
 exports.getAllInfo = async (req, res) => {
   try {
@@ -31,5 +31,22 @@ exports.createInfo = async (req, res) => {
     return res.status(201).json(user);
   } catch (err) {
     return res.status(500).json({ error: 'Error saving data', details: err.message });
+  }
+};
+
+// This function should be renamed to match the router reference
+exports.createInfoWithLocal = async (req, res) => { // Changed the name to match your route
+  try {
+    const localPath = path.join('uploads', req.file.filename); // Local file path
+
+    const newInfo = new InfoModel({ // Ensure you're using the correct model
+      ...req.body,
+      resume: { localPath: localPath }, // Save local file path in DB
+    });
+    
+    await newInfo.save();
+    res.status(201).json({ message: 'Info created with local file upload', newInfo });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
   }
 };

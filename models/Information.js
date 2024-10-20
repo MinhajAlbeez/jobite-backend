@@ -8,7 +8,10 @@ const InfoSchema = new mongoose.Schema({
   currentPosition: { type: String },
   jobType: { type: String, enum: ['Full Time', 'Part Time', 'Contract'], required: true },
   skills: { type: [String], required: true },
-  resume: { type: String },
+  resume: { 
+    cloudinaryUrl: { type: String },  // Store Cloudinary URL
+    localPath: { type: String }       // Store local file path
+  },
   aboutUs: { type: String }
 });
 

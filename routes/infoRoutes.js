@@ -4,18 +4,12 @@ const infoController = require('../controller/infoController');
 const { validate } = require('../middlewares/validationMiddleware');
 const { infoSchema } = require('../schemas/validationSchemas');
 const upload = require('../config/cloudinaryConfig'); 
-const InfoModel = require('../models/Information');
+const uploadLocal = require('../middlewares/localStorageConfig');   
+const auth = require('../middlewares/auth');
+const authRole = require('../middlewares/authRole '); 
 
-// router.get('/getInfo', infoController.getAllInfo);
-
-router.get('/getInfo', async (req, res) => {
-  try {
-    const users = await InfoModel.find({}); 
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// router.get('/getInfo', auth, authRole(['superadmin']), infoController.getAllInfo);
+router.get('/getInfo', infoController.getAllInfo);
 
 
 router.post(
@@ -23,6 +17,13 @@ router.post(
   upload.single('resume'),
   validate(infoSchema),    
   infoController.createInfo
+);
+
+router.post(
+  '/createInfo/local',
+  uploadLocal.single('resume'),  
+  validate(infoSchema),
+  infoController.createInfoWithLocal
 );
 
 module.exports = router;
